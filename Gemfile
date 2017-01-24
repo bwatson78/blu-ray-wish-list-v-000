@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+gem 'therubyracer'
+gem 'omniauth'
+gem 'omniauth-digitalocean'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
