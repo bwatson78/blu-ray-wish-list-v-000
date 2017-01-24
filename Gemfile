@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'therubyracer'
 gem 'omniauth'
-gem 'omniauth-digitalocean'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google'
