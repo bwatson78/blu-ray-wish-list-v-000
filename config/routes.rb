@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {:omniauth_callbacks => "callbacks"}
+
+
+
+  resources :discs do
+    resources :movies
+  end
+
+  resources :movies do
+    resources :actors
+    resources :genres
+  end
+
   resources :actors
   resources :directors
   resources :genres
-  resources :movies
   resources :discs
 
   root 'discs#index'

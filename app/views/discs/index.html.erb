@@ -1,0 +1,12 @@
+<div class="container">
+  <h1><strong><%= current_user.email %>'s Wishlist</strong></h1>
+  <ul>
+    <% @discs.each do |disc| %>
+      <li><%= link_to "#{disc.title}", disc_movies_path(disc) %> | <%= link_to "Amazon's Disc Page", url: "#{disc.amazon_url}" %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="container">
+
+</div>
