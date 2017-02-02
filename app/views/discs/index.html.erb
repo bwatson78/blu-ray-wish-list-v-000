@@ -2,11 +2,11 @@
   <h1><strong><%= current_user.email %>'s Wishlist</strong></h1>
   <ul>
     <% @discs.each do |disc| %>
-      <li><%= link_to "#{disc.title}", disc_movies_path(disc) %> | <%= link_to "Amazon's Disc Page", url: "#{disc.amazon_url}" %></li>
+      <li><%= link_to "#{disc.title}", disc_movies_path(disc) %> | <a target="_blank" href="<%= disc.amazon_url %>">Amazon Page</a></li>
     <% end %>
   </ul>
-</div>
 
-<div class="container">
-
+  <div class="container">
+    <%= link_to "Add A Disc To Your Wishlist!", new_disc_path %>
+  </div>
 </div>
