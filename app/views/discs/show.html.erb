@@ -1,0 +1,12 @@
+<div class="container">
+  <h1><%= @disc.title %></h1><br>
+
+  <p>Year Disc Released: <%= @disc.pressing_year %></p>
+  <p><%= link_to "Disc's Amazon Page", "#{@disc.amazon_url}", target: "_blank" %></p>
+  <h2>Disc's Movie(s):</h2><br>
+  <% @disc.movies.each do |movie| %>
+    <%= link_to movie.title, movie_path(movie) %>
+  <% end %>
+
+
+</div>

@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google, :twitter]
+         :omniauthable, :omniauth_providers => [:facebook]
   has_many :user_discs
   has_many :discs, through: :user_discs
 
@@ -15,4 +15,6 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0,20]
     end
   end
+
+
 end

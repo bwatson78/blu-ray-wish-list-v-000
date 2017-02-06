@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {:omniauth_callbacks => "callbacks"}
 
+  post 'discs/:id/purchase', to: 'discs#purchase', as: 'purchase'
 
 
   resources :discs do

@@ -3,9 +3,9 @@ class CreateDiscs < ActiveRecord::Migration[5.0]
     create_table :discs do |t|
       t.string :title
       t.integer :pressing_year
-      t.boolean :special_edition?
+      t.boolean :special_edition?, default: false
       t.string :amazon_url
-      t.boolean :purchased?
+      t.integer :purchased
 
       t.timestamps
     end

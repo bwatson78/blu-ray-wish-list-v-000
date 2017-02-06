@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>New Disc Form:</h1>
+
+  <form class="new_disc" id="new_disc" action="/discs" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <label for="disc_title">Title</label>
+    <input type="text" name="disc[title]" id="disc_title"><br>
+    <label class="control-label" for="disc_pressing_year">Year Disc Released</label>
+    <input type="number" name="disc[pressing_year]" id="disc_pressing_year"><br>
+    <label class="control-label" for="disc_amazon_url">Paste The URL For Amazon's Disc Purchase Page Here</label>
+    <input type="text" name="disc[amazon_url]" id="disc_amazon_url"><br>
+    <label class="control-label" for="disc_special_edition">Is This A Special/Collector's Edition?</label>
+    <input name="disc[special_edition?]" type="hidden" value="0"><input type="checkbox" value="1" name="disc[special_edition?]" id="disc_special_edition?"><br>
+    <div class="container">
+      <fieldset>
+        <legend>First/Only Movie Details:</legend>
+        <strong>Title</strong>
+        <input type="text" name="disc[movie_attributes][title]" id="disc[movie_attributes][title]"><br>
+        <strong>Year Movie Released</strong>
+        <input type="number" name="disc[movie_attributes][release_year]" id="disc[movie_attributes][release_year]"><br>
+        <strong>Movie's IMDB URL</strong>
+        <input type="text" name="disc[movie_attributes][imdb_url]" id="disc[movie_attributes][imdb_url]"><br>
+      </fieldset><br>
+    </div>
+    <input type="submit" value="Create Disc">
+  </form>
+</div>

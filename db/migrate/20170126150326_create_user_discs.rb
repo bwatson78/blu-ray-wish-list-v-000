@@ -3,7 +3,7 @@ class CreateUserDiscs < ActiveRecord::Migration[5.0]
     create_table :user_discs do |t|
       t.belongs_to :user, foreign_key: true
       t.belongs_to :disc, foreign_key: true
-      t.boolean :public?
+      t.boolean :public, default: false
     end
   end
 end

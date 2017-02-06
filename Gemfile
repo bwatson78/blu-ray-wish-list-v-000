@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
+gem 'faker'
+gem 'friendly_id'
 gem "bootstrap-sass", "~> 3.2.0"
 gem "autoprefixer-rails"
 gem 'therubyracer'
 gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google'
 gem 'devise'

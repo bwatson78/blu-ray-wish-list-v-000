@@ -1,0 +1,13 @@
+<div class="container">
+  <% if !!@movie %>
+    <h1>Create A New Genre for <%= @movie.title %>: </h1>
+  <% else %>
+    <h1>Create A Genre:</h1>
+  <% end %>
+
+  <%= form_for @genre, url: movie_genres_path do |f| %>
+    <%= f.label :tag %>
+    <%= f.text_field :tag %><br>
+    <%= f.submit %>
+  <% end %>
+</div>

@@ -154,7 +154,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 8..72
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -271,7 +271,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
-  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
-  config.omniauth :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
-  config.omniauth :google, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET']
+  config.omniauth :facebook, "159312077898031", 'dde0cb7b90df6c157a82a8b28e850796'
+  config.omniauth :google, "645301022199-34ol4rfh5943p1rcitvdq6qdbk5tko07.apps.googleusercontent.com", "436DrA5e4lLWqBnXxCQoum_n"
 end

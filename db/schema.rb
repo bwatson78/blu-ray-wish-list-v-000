@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20170126150326) do
   create_table "discs", force: :cascade do |t|
     t.string   "title"
     t.integer  "pressing_year"
-    t.boolean  "special_edition?"
+    t.boolean  "special_edition?", default: false
     t.string   "amazon_url"
-    t.boolean  "purchased?"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "purchased"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "genres", force: :cascade do |t|
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20170126150326) do
   create_table "user_discs", force: :cascade do |t|
     t.integer "user_id"
     t.integer "disc_id"
-    t.boolean "public?"
+    t.boolean "public",  default: false
     t.index ["disc_id"], name: "index_user_discs_on_disc_id"
     t.index ["user_id"], name: "index_user_discs_on_user_id"
   end

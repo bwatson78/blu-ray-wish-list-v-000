@@ -8,9 +8,10 @@
     <h3>Film's Actors/Actresses:</h3>
     <ul>
       <% @movie.actors.each do |actor| %>
-        <li><%= link_to actor.name, movie_actor_path(movie_id: @movie.id) %></li>
+        <li><%= link_to actor.name, movie_actor_path(movie_id: @movie.id, id: actor.id) %></li>
       <% end %>
     </ul>
+    <%= link_to "Add An Actor/Actress To This Movie!", new_movie_actor_path(@movie) %>
 
     <h3>Film's Genre(s):</h3>
     <ul>
@@ -18,5 +19,6 @@
         <li><%= link_to genre.tag, genre_path(genre) %></li>
       <% end %>
     </ul>
+    <%= link_to "Add A Genre To This Movie!", new_movie_genre_path(@movie) %>
 
 </div>
