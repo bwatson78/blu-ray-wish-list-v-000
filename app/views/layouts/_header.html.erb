@@ -15,6 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li> <%= link_to "Wishlist", root_path %> </li>
+        <li><%= link_to "Owned Discs List", discs_owned_path %></li>
         <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
       </ul>
   </div>

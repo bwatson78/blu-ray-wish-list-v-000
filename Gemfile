@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'bootstrap_form'
 gem 'faker'
 gem 'friendly_id'
 gem "bootstrap-sass", "~> 3.2.0"

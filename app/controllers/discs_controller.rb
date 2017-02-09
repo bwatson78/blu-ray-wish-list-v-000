@@ -10,10 +10,13 @@ class DiscsController < ApplicationController
 
   def create
     @disc = Disc.create(disc_params)
-    @disc.save
-    current_user.discs << @disc
-    current_user.save
-    redirect_to @disc
+    if @disc.save
+      current_user.discs << @disc
+      current_user.save
+      redirect_to @disc, alert: "Disc Saved!"
+    else
+      redirect_to new_disc_path, alert: "Your disc didn't save!"
+    end
   end
 
   def show
@@ -26,6 +29,10 @@ class DiscsController < ApplicationController
     redirect_to root_path
   end
 
+  def owned
+    @discs = current_user.discs.where(:purchased == 1)
+  end
+  
   private
 
   def disc_params

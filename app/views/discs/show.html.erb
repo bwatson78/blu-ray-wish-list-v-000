@@ -4,9 +4,13 @@
   <p>Year Disc Released: <%= @disc.pressing_year %></p>
   <p><%= link_to "Disc's Amazon Page", "#{@disc.amazon_url}", target: "_blank" %></p>
   <h2>Disc's Movie(s):</h2><br>
-  <% @disc.movies.each do |movie| %>
-    <%= link_to movie.title, movie_path(movie) %>
-  <% end %>
+  <ul>
+    <% @disc.movies.each do |movie| %>
+      <li><%= link_to movie.title, movie_path(movie) %></li>
+    <% end %><br><br>
+  </ul>
 
+
+  <%= link_to "Click Here To Add Another Movie To This Disc", new_disc_movie_path(@disc) %>
 
 </div>
