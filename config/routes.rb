@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'discs/owned', to: 'discs#owned'
 
   resources :discs do
-    resources :movies
+    resources :movies, only: [:show, :new, :create, :destroy]
   end
 
   resources :movies do

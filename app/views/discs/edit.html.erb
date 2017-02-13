@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Edit <%= @disc.title %>:</h1>
+
+  <%= form_for @disc do |f| %>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :pressing_year, "Year Disc Released" %>
+      <%= f.number_field :pressing_year %>
+    </div>
+    <div class="field">
+      <%= f.label :special_edition?, "Special Edition?"%>
+      <%= f.check_box :special_edition? %>
+    </div>
+    <div class="field">
+      <%= f.label :amazon_url, "Paste The URL For Amazon's Disc Purchase Page Here" %>
+      <%= f.text_field :amazon_url %>
+    </div>
+    <div class="action">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

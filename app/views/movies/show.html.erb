@@ -1,5 +1,5 @@
 <div class="container">
-    <h1><%= @movie.title %></h1><br><br>
+    <h1><%= @movie.title %></h1> <%= link_to "Edit", edit_movie_path(@movie) %><br><br>
     <ul>
       <li>Year Released: <%= @movie.release_year %></li>
       <li><%= link_to "IMDB Information Page", "#{@movie.imdb_url }", target: "_blank" %></li>

@@ -1,14 +1,5 @@
 class MoviesController < ApplicationController
 
-  def index
-    if params[:disc_id]
-      @disc = Disc.find(params[:disc_id])
-      @movies = Disc.find(params[:disc_id]).movies
-    else
-      @movies = Movie.all
-    end
-  end
-
   def show
     @movie = Movie.find(params[:id])
   end
@@ -25,6 +16,30 @@ class MoviesController < ApplicationController
       redirect_to @disc, alert: "Movie Saved!"
     else
       render :new, alert: "Movie Not Saved!"
+    end
+  end
+
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:id])
+    if @movie.update(movie_params)
+      redirect_to @movie, alert: "Movie Updated!"
+    else
+      render :edit, alert: "Movie Not Updated!"
+    end
+  end
+
+  def destroy
+    @disc = Disc.find(params[:disc_id])
+    @movie = @disc.movies.find(params[:id])
+    @movie.delete
+    if @disc.save
+      redirect_to @disc, alert: "Movie Deleted"
+    else
+      redirect_to @disc, alert: "Movie Not Deleted"
     end
   end
 
