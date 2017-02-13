@@ -1,7 +1,7 @@
 class DiscsController < ApplicationController
 
   def index
-    @discs = current_user.discs.where('purchased != 1')
+    @discs = current_user.discs.where(purchased: nil)
   end
 
   def new
@@ -15,7 +15,7 @@ class DiscsController < ApplicationController
       current_user.save
       redirect_to @disc, alert: "Disc Saved!"
     else
-      redirect_to new_disc_path, alert: "Your disc didn't save!"
+      render :new, alert: "Your disc didn't save!"
     end
   end
 
@@ -30,9 +30,9 @@ class DiscsController < ApplicationController
   end
 
   def owned
-    @discs = current_user.discs.where(:purchased == 1)
+    @discs = current_user.discs.where(purchased: 1)
   end
-  
+
   private
 
   def disc_params

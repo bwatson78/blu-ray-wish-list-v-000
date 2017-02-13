@@ -7,9 +7,6 @@ class Movie < ApplicationRecord
     # t.datetime "updated_at",   null: false
     # t.index ["disc_id"], name: "index_movies_on_disc_id"
   belongs_to :disc, optional: true
-  has_one :director
-  has_many :movie_actors
-  has_many :actors, through: :movie_actors
   has_many :movie_genres
   has_many :genres, through: :movie_genres
   validates :title, :release_year, presence: true

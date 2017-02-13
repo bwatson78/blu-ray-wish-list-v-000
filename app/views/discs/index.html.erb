@@ -3,7 +3,7 @@
   <ul>
     <% @discs.each do |disc| %>
       <li><%= link_to "#{disc.title}", disc_movies_path(disc) %> | <a target="_blank" href="<%= disc.amazon_url %>">Amazon Page</a>
-      | <%= link_to 'Purchased?', purchase_path(disc), method: 'post' if disc.purchased.nil? || disc.purchased == 0 %></li>
+      | <%= link_to 'Purchased?', purchase_path(disc), method: 'post'%></li>
     <% end %>
   </ul><br><br>
 

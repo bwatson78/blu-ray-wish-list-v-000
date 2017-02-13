@@ -9,13 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :movies do
-    resources :actors
-    resources :genres
+    resources :genres, only: [:new, :create, :destroy]
   end
 
-  resources :actors
-  resources :directors
-  resources :genres
+  resources :genres, only: [:show, :index]
   resources :discs
 
   root 'discs#index'

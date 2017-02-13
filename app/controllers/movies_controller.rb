@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to @disc, alert: "Movie Saved!"
     else
-      redirect_to new_disc_movie_path(@disc), alert: "Movie Not Saved!"
+      render :new, alert: "Movie Not Saved!"
     end
   end
 

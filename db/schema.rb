@@ -12,24 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170126150326) do
 
-  create_table "actors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "imdb_url"
-    t.integer  "movie_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_actors_on_movie_id"
-  end
-
-  create_table "directors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "imdb_url"
-    t.integer  "movie_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_directors_on_movie_id"
-  end
-
   create_table "disc_movies", force: :cascade do |t|
     t.integer  "disc_id"
     t.integer  "movie_id"
@@ -55,15 +37,6 @@ ActiveRecord::Schema.define(version: 20170126150326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_genres_on_movie_id"
-  end
-
-  create_table "movie_actors", force: :cascade do |t|
-    t.integer  "actor_id"
-    t.integer  "movie_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["actor_id"], name: "index_movie_actors_on_actor_id"
-    t.index ["movie_id"], name: "index_movie_actors_on_movie_id"
   end
 
   create_table "movie_genres", force: :cascade do |t|
