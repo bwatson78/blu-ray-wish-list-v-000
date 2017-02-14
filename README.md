@@ -1,10 +1,7 @@
-
-
 # blu-ray-wish-list-v-000
 
-export FACEBOOK_KEY=159312077898031
-export FACEBOOK_SECRET=dde0cb7b90df6c157a82a8b28e850796
-export TWITTER_KEY=AYLmKjkCpzJf7qgstnK98MwpF
-export TWITTER_SECRET=f62dtYeddak3w5JemWPAvkYr58r4j4c65AWVddrwCzvfqdfkeI
-export GOOGLE_KEY=645301022199-34ol4rfh5943p1rcitvdq6qdbk5tko07.apps.googleusercontent.com
-export GOOGLE_SECRET=436DrA5e4lLWqBnXxCQoum_n
+This website provides a simple wishlist for Blu-Rays the user wants to purchase.
+An added feature is a catalog of movies the user has already purchased. A visitor
+this website will be able to see their movies categorized by Genre Tags as well as
+other user's publicly listed discs as assisting tools to spark ideas for new discs
+to add. 
