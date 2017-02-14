@@ -1,7 +1,8 @@
 class MoviesController < ApplicationController
+  before_action :load_movie, only: [:show, :edit, :update]
+  before_action :load_disc, only: [:create, :destroy]
 
   def show
-    @movie = Movie.find(params[:id])
   end
 
   def new
@@ -9,22 +10,19 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @disc = Disc.find(params[:disc_id])
     @movie = @disc.movies.build(movie_params)
     @disc.save
     if @movie.save
-      redirect_to @disc, alert: "Movie Saved!"
+      to_disc("Movie Saved!")
     else
       render :new, alert: "Movie Not Saved!"
     end
   end
 
   def edit
-    @movie = Movie.find(params[:id])
   end
 
   def update
-    @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
       redirect_to @movie, alert: "Movie Updated!"
     else
@@ -33,13 +31,12 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    @disc = Disc.find(params[:disc_id])
     @movie = @disc.movies.find(params[:id])
     @movie.delete
     if @disc.save
-      redirect_to @disc, alert: "Movie Deleted"
+      to_disc("Movie Deleted")
     else
-      redirect_to @disc, alert: "Movie Not Deleted"
+      to_disc("Movie Not Deleted")
     end
   end
 
@@ -51,6 +48,18 @@ class MoviesController < ApplicationController
         :release_year,
         :imdb_url,
         :disc_id)
+  end
+
+  def load_movie
+    @movie = Movie.find(params[:id])
+  end
+
+  def load_disc
+    @disc = Disc.find(params[:disc_id])
+  end
+
+  def to_disc(string)
+    redirect_to @disc, alert: "#{string}"
   end
 
 end

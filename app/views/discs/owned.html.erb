@@ -1,7 +1,7 @@
 <div class="container center">
   <h1><strong><%= current_user.email %>'s Owned Discs</strong></h1><br>
   <ul>
-    <% @discs.each do |disc| %>
+    <% owned_discs.each do |disc| %>
       <li><%= link_to disc.title, disc %></li>
     <% end %>
   </ul>

@@ -3,7 +3,8 @@
   <ul>
     <% @discs.each do |disc| %>
       <li><%= link_to "#{disc.title}", disc_path(disc) %> | <a target="_blank" href="<%= disc.amazon_url %>">Amazon Page</a>
-      | <%= link_to 'Purchased?', purchase_path(disc), method: 'post'%> | <%= link_to "Delete?", disc, method: 'delete', data: {confirm: "Are You Sure?"} %> </li>
+      | <%= link_to 'Purchased?', purchase_path(disc), method: 'post'%>
+       | <%= link_to "Delete?", disc, method: 'delete', data: {confirm: "Are You Sure?"} %> </li>
     <% end %>
   </ul><br><br>
 

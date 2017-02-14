@@ -1,0 +1,25 @@
+<%= form_for @movie, url: passed_url, method: action do |f| %>
+<div class="field">
+  <%= f.label :title %>
+  <% if @movie.errors[:title].any? %>
+    <%= f.text_field :title, placeholder: @movie.errors[:title].first %>
+  <% else %>
+    <%= f.text_field :title %>
+  <% end %>
+</div>
+<div class="field">
+  <%= f.label :release_year, "Year Released", class: 'control-label' %>
+  <% if @movie.errors[:release_year].any? %>
+    <%= f.text_field :release_year, placeholder: @movie.errors[:release_year].first %>
+  <% else %>
+    <%= f.text_field :release_year %>
+  <% end %>
+</div>
+<div class="field">
+  <%= f.label :imdb_url, "Movie's IMDB.com Page Address", class: 'control-label'%>
+  <%= f.text_field :imdb_url %><br>
+</div>
+<div class="action">
+  <%= f.submit %>
+</div>
+<% end %>

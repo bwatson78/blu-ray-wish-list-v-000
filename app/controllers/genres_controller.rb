@@ -1,9 +1,10 @@
 class GenresController < ApplicationController
+  before_action :load_movie, only: [:create, :destroy]
 
   def index
     @genres = Genre.all
   end
-  
+
   def show
     @genre = Genre.find(params[:id])
   end
@@ -13,25 +14,23 @@ class GenresController < ApplicationController
   end
 
   def create
-    @movie = Movie.find(params[:movie_id])
     @genre = Genre.find_or_create_by(genre_params)
     @genre.save
     @movie.genres << @genre
     if @movie.save
-      redirect_to @movie, alert: "Tag Created!"
+      to_movie("Tag Created!")
     else
       render new_movie_genre_path(params[:movie_id]), alert: "Tag Not Created"
     end
   end
 
   def destroy
-    @movie = Movie.find(params[:movie_id])
     @genre = @movie.genres.find(params[:id])
     @genre.delete
     if @movie.save
-      redirect_to @movie, alert: "Genre Deleted!"
+      to_movie("Genre Deleted!")
     else
-      redirect_to @movie, alert: "Genre Could Not Be Deleleted!"
+      to_movie("Genre Could Not Be Deleleted!")
     end
   end
 
@@ -41,6 +40,14 @@ class GenresController < ApplicationController
     params.require(:genre).permit(
         :tag,
         :movie_id)
+  end
+
+  def load_movie
+    @movie = Movie.find(params[:movie_id])
+  end
+
+  def to_movie(string)
+    redirect_to @movie, alert: "#{string}"
   end
 
 end

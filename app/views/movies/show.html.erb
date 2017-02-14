@@ -8,7 +8,8 @@
     <h3>Film's Genre(s):</h3>
     <ul>
       <% @movie.genres.each do |genre| %>
-        <li><%= link_to genre.tag, genre_path(genre) %> | <%= link_to "Delete Tag", movie_genre_path(@movie.id, genre), method: 'delete' %></li>
+        <li><%= link_to genre.tag, genre_path(genre) %>
+           | <%= link_to "Delete Tag", movie_genre_path(@movie.id, genre), method: 'delete' %></li>
       <% end %>
     </ul>
     <%= link_to "Add A Genre To This Movie!", new_movie_genre_path(@movie) %>

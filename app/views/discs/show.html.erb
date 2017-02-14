@@ -1,7 +1,7 @@
 <div class="container">
   <h1><%= @disc.title %></h1> <%= link_to "Edit", edit_disc_path(@disc) %><br>
 
-  <% if @disc.special_edition? == true %>
+  <% if @disc.special? %>
     <p><strong>Special Edition</strong></p>
   <% end %>
   <p>Year Disc Released: <%= @disc.pressing_year %></p>
@@ -9,7 +9,8 @@
   <h2>Disc's Movie(s):</h2><br>
   <ul>
     <% @disc.movies.each do |movie| %>
-      <li><%= link_to movie.title, movie_path(movie) %> | <%= link_to "Delete", disc_movie_path(@disc, movie), method: "delete" %></li>
+      <li><%= link_to movie.title, movie_path(movie) %>
+         | <%= link_to "Delete?", disc_movie_path(@disc, movie), method: "delete" %></li>
     <% end %><br><br>
   </ul>
 

@@ -25,10 +25,14 @@
         <input type="text" name="disc[pressing_year]" id="disc_pressing_year"><br>
       </div>
     <% end %>
-    <label class="control-label" for="disc_amazon_url">Paste The URL For Amazon's Disc Purchase Page Here</label>
-    <input type="text" name="disc[amazon_url]" id="disc_amazon_url"><br>
-    <label class="control-label" for="disc_special_edition">Is This A Special/Collector's Edition?</label>
-    <input name="disc[special_edition?]" type="hidden" value="0"><input type="checkbox" value="1" name="disc[special_edition?]" id="disc_special_edition?"><br>
+    <div class="field">
+      <label class="control-label" for="disc_amazon_url">Paste The URL For Amazon's Disc Purchase Page Here</label>
+      <input type="text" name="disc[amazon_url]" id="disc_amazon_url"><br>
+    </div>
+    <div class="field">
+      <label class="control-label" for="disc_special_edition">Is This A Special/Collector's Edition?</label>
+      <input name="disc[special_edition?]" type="hidden" value="0"><input type="checkbox" value="1" name="disc[special_edition?]" id="disc_special_edition?"><br>
+    </div>
     <div class="container">
       <fieldset>
         <legend>First/Only Movie Details:</legend>
@@ -46,6 +50,8 @@
           </div>
       </fieldset><br>
     </div>
-    <input type="submit" value="Create Disc">
+    <div class="action">
+      <input type="submit" value="Create Disc">
+    </div>
   </form>
 </div>

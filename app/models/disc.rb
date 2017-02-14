@@ -29,5 +29,8 @@ class Disc < ApplicationRecord
     self.save
   end
 
+  def special?
+    self.special_edition? == true
+  end
 
 end

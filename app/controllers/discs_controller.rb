@@ -1,5 +1,5 @@
 class DiscsController < ApplicationController
-
+  before_action :load_disc, only: [:show, :edit, :update, :destroy, :purchase]
   def index
     @discs = current_user.discs.where(purchased: nil)
   end
@@ -13,46 +13,40 @@ class DiscsController < ApplicationController
     if @disc.save
       current_user.discs << @disc
       current_user.save
-      redirect_to @disc, alert: "Disc Saved!"
+      to_disc("Disc Saved!")
     else
       render :new, alert: "Your disc didn't save!"
     end
   end
 
   def show
-    @disc = Disc.find(params[:id])
   end
 
   def edit
-    @disc = Disc.find(params[:id])
   end
 
   def update
-    @disc = Disc.find(params[:id])
     if @disc.update(disc_params)
-      redirect_to @disc, alert: "Disc Updated!"
+      to_disc("Disc Updated!")
     else
       redirect_to edit_disc_path(@disc), alert: "Disc Not Updated!"
     end
   end
 
   def destroy
-    @disc = Disc.find(params[:id])
     if @disc.delete
-      redirect_to root_path, alert: "Disc Deleted!"
+      to_root("Disc Deleted!")
     else
-      redirect_to root_path, alert: "Disc Not Deleted!"
+      to_root("Disc Not Deleted!")
     end
   end
 
   def purchase
-    disc = Disc.find(params[:id])
-    disc.purchase
-    redirect_to root_path
+    @disc.purchase
+    to_root("")
   end
 
   def owned
-    @discs = current_user.discs.where(purchased: 1)
   end
 
   private
@@ -68,5 +62,15 @@ class DiscsController < ApplicationController
         movie_attributes: [:title, :release_year, :imdb_url ,disc_id: :id])
   end
 
+  def load_disc
+    @disc = Disc.find(params[:id])
+  end
 
+  def to_disc(string)
+    redirect_to @disc, alert: "#{string}"
+  end
+
+  def to_root(string)
+    redirect_to root_path, alert: "#{string}"
+  end
 end
