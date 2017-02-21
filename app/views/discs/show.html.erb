@@ -13,7 +13,13 @@
          | <%= link_to "Delete?", disc_movie_path(@disc, movie), method: "delete" %></li>
     <% end %><br><br>
   </ul>
-
+  <% @disc.user_discs.each do |user_disc| %>
+    <% if user_disc.pub == 1 %>
+      <h3>Disc Is Public</h3>
+    <% else %>
+      <%= link_to "Make Disc Public?", publicize_path(disc_id: @disc), method: 'post' %><br>
+    <% end %>
+  <% end %>
 
   <%= link_to "Click Here To Add Another Movie To This Disc", new_disc_movie_path(@disc) %>
 

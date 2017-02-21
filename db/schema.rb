@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170126150326) do
   create_table "user_discs", force: :cascade do |t|
     t.integer "user_id"
     t.integer "disc_id"
-    t.boolean "public",  default: false
+    t.integer "pub"
     t.index ["disc_id"], name: "index_user_discs_on_disc_id"
     t.index ["user_id"], name: "index_user_discs_on_user_id"
   end

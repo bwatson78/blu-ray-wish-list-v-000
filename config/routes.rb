@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :genres, only: [:show, :index]
   resources :discs
+  post 'user_discs/:id/publicize', to: 'user_discs#publicize', as: 'publicize'
 
   root 'discs#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
