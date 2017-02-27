@@ -33,4 +33,13 @@ class Disc < ApplicationRecord
     self.special_edition? == true
   end
 
+  def self.public_discs
+    Disc.joins(:user_discs).where("user_discs.pub == 1")
+  end
+
+  def self.owned_discs
+    Disc.where(purchased: 1)
+  end
+
+
 end

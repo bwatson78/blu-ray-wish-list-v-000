@@ -9,7 +9,7 @@
   <h2>Disc's Movie(s):</h2><br>
   <ul>
     <% @disc.movies.each do |movie| %>
-      <li><%= link_to movie.title, movie_path(movie) %>
+      <li><%= link_to movie.title, disc_movie_path(movie) %>
          | <%= link_to "Delete?", disc_movie_path(@disc, movie), method: "delete" %></li>
     <% end %><br><br>
   </ul>

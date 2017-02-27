@@ -15,7 +15,7 @@
   <div class="container left">
     <h3>*** If you need some disc ideas, check out what others have added!:</h3>
     <ul>
-      <% non_user_discs.each do |disc| %>
+      <% @non_user.each do |disc| %>
         <li><%= disc.title %></li>
       <% end %>
     </ul>

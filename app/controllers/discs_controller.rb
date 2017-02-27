@@ -1,7 +1,9 @@
 class DiscsController < ApplicationController
   before_action :load_disc, only: [:show, :edit, :update, :destroy, :purchase]
+
   def index
     @discs = current_user.discs.where(purchased: nil)
+    @non_user = non_user_discs.public_discs
   end
 
   def new
@@ -73,4 +75,9 @@ class DiscsController < ApplicationController
   def to_root(string)
     redirect_to root_path, alert: "#{string}"
   end
+
+  def non_user_discs
+    Disc.joins(:user_discs).where("user_discs.user_id != ?", current_user.id)
+  end
+
 end
