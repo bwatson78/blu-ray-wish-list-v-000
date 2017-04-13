@@ -1,11 +1,6 @@
 <div class="container center">
   <h1><strong><%= current_user.email %>'s Wishlist</strong></h1>
-  <ul>
-    <% @discs.each do |disc| %>
-      <li><%= link_to "#{disc.title}", disc_path(disc) %> | <a target="_blank" href="<%= disc.amazon_url %>">Amazon Page</a>
-      | <%= link_to 'Purchased?', purchase_path(disc), method: 'post'%>
-       | <%= link_to "Delete?", disc, method: 'delete', data: {confirm: "Are You Sure?"} %> </li>
-    <% end %>
+  <ul id="disc-list">
   </ul><br><br>
 
   <div class="container">
@@ -24,3 +19,20 @@
 
 
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $.get("/discs.json", function(data) {
+      var discs = data;
+      $("#disc-list").html("");
+      for (var i = 0; i < discs.length; i++) {
+        var titleLink = '<a href="/discs/' + discs[i]["id"] + '">' + discs[i]["title"] + '</a>';
+        var amazonLink = '<a target="_blank" href="' + discs[i]["amazon_url"] + '">Amazon Page</a>';
+        var purchasedLink = '<a rel="nofollow" data-method="post" href="/discs/' + discs[i]["id"] + '/purchase">Purchased?</a>';
+        var deleteLink = '<a data-confirm="Are You Sure?" rel="nofollow" data-method="delete" href="/discs/' + discs[i]["id"] + '">Delete?</a>';
+        var fullLi = '<li>' + titleLink + ' | ' + amazonLink + ' | ' + purchasedLink + ' | ' + deleteLink + '</li>';
+        $("#disc-list").append(fullLi)
+      };
+    });
+  });
+</script>

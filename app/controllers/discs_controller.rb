@@ -4,6 +4,10 @@ class DiscsController < ApplicationController
   def index
     @discs = current_user.discs.where(purchased: nil)
     @non_user = non_user_discs.public_discs
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @discs}
+    end
   end
 
   def new
