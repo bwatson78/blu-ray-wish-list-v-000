@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'active_model_serializers'
 gem 'bootstrap_form'
 gem 'faker'
 gem 'friendly_id'
