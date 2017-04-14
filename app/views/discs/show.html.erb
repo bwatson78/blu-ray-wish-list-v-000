@@ -33,25 +33,26 @@
     this.amazon_url = amazon_url;
     this.special = special;
     this.pressing_year = pressing_year;
-    this.movies = [];
+    this.movies = movies;
+    this.moviesObjs = [];
+
     this.user_discs = [];
 
-    this.loadMovies = function() {
-      movies.forEach(function(movie) {
-        var movieInstance = new Movie(movie["id"], movie["title"], movie["release_year"], movie["imdb_url"]);
-        this.movie << movieInstance;
-      });
-    };
+  };
 
-    this.loadUserDiscs = function() {
-      user_discs.forEach(function(userD) {
-        var userDiscInstance = new UserDisc(userD["pub"]);
-        this.user_discs << userDiscInstance;
-      });
+  var = loadMovies = function(discInstance) {
+    for (var i = 0; i < this.movies.length; i++) {
+      var movieInstance = new Movie(this.movie[i]["id"], this.movie[i]["title"], this.movie[i]["release_year"], this.movie[i]["imdb_url"]);
+      this.moviesObjs[i] = movieInstance;
+      console.log(movieInstance);
     };
+  };
 
-    this.loadMovies();
-    this.loadUserDiscs();
+  var = loadUserDiscs = function(discInstance) {
+    user_discs.forEach(function(userD) {
+      var userDiscInstance = new UserDisc(userD["pub"]);
+      this.user_discs << userDiscInstance;
+    });
   };
 
   function Movie(id, title, release_year, imdb_url) {
@@ -70,7 +71,8 @@
     $.get('/discs/<%=@disc.id%>.json', function(data) {
       var disc = data;
       var d = new Disc(disc["id"], disc["title"], disc["amazon_url"], disc["special?"], disc["pressing_year"], disc["movies"], disc["user_discs"]);
-      console.log(d)
+      loadMovies();
+      loadUserDiscs();
     });
   });
 </script>
