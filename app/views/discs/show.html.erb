@@ -25,10 +25,24 @@
 
 </div>
 
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-    $.get("/discs.json", function(data) {
 
+<script type="text/javascript" charset="utf-8">
+  function Disc(id, title, amazon_url, special?, pressing_year, movies, user_discs) {
+    this.id = id;
+    this.title = title;
+    this.amazon_url = amazon_url;
+    this.special? = special?;
+    this.pressing_year = pressing_year;
+    this.movies = [];
+    this.user_discs = [];
+
+    
+  }
+
+  $(document).ready(function() {
+    $.get("/disc" + params[:id] + ".json", function(data) {
+      var disc = data;
+      var d = new Disc()
     });
   });
 </script>
