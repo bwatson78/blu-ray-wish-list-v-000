@@ -26,6 +26,10 @@ class DiscsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @disc}
+    end
   end
 
   def edit

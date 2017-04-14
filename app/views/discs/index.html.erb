@@ -29,7 +29,13 @@
     };
     this.linkForAmazon = function() {
       return('<a target="_blank" href="' + this.amazon_url + '">Amazon Page</a>');
-    }
+    };
+    this.linkForPurchased = function() {
+      return('<a rel="nofollow" data-method="post" href="/discs/' + this.id + '/purchase">Purchased?</a>');
+    };
+    this.linkForDelete = function() {
+      return('<a data-confirm="Are You Sure?" rel="nofollow" data-method="delete" href="/discs/' + this.id + '">Delete?</a>');
+    };
   }
 
   $(document).ready(function() {
@@ -40,8 +46,8 @@
         var disc = new Disc(discs[i]["id"], discs[i]["title"], discs[i]["amazon_url"]);
         var titleLink = disc.linkForTitle();
         var amazonLink = disc.linkForAmazon();
-        var purchasedLink = '<a rel="nofollow" data-method="post" href="/discs/' + disc.id + '/purchase">Purchased?</a>';
-        var deleteLink = '<a data-confirm="Are You Sure?" rel="nofollow" data-method="delete" href="/discs/' + disc.id + '">Delete?</a>';
+        var purchasedLink = disc.linkForPurchased();
+        var deleteLink = disc.linkForDelete();
         var fullLi = '<li>' + titleLink + ' | ' + amazonLink + ' | ' + purchasedLink + ' | ' + deleteLink + '</li>';
         $("#disc-list").append(fullLi)
       };
