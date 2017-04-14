@@ -44,7 +44,6 @@
     for (var i = 0; i < discInstance.movies.length; i++) {
       var movieInstance = new Movie(discInstance.movies[i]["id"], discInstance.movies[i]["title"], discInstance.movies[i]["release_year"], discInstance.movies[i]["imdb_url"]);
       discInstance.moviesObjs[i] = movieInstance;
-      console.log(movieInstance);
     };
   };
 
@@ -52,7 +51,6 @@
     for (var i = 0; i < discInstance.user_discs.length; i++) {
       var userDiscInstance = new UserDisc(discInstance.user_discs[i]["pub"]);
       discInstance.user_discObjs[i] = userDiscInstance;
-      console.log(userDiscInstance);
     };
   };
 
