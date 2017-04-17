@@ -5,21 +5,10 @@
   <p id="year-released"></p>
   <p id="amazon-link"></p>
   <h2>Disc's Movie(s):</h2><br>
-  <ul id="disc-movies">
-    <% @disc.movies.each do |movie| %>
-      <li><%= link_to movie.title, disc_movie_path(movie) %>
-         | <%= link_to "Delete?", disc_movie_path(@disc, movie), method: "delete" %></li>
-    <% end %><br><br>
-  </ul>
-  <% @disc.user_discs.each do |user_disc| %>
-    <% if user_disc.pub == 1 %>
-      <h3 id="public-notify">Disc Is Public</h3>
-    <% else %>
-      <%= link_to "Make Disc Public?", publicize_path(disc_id: @disc), method: 'post' %><br>
-    <% end %>
-  <% end %>
-
+  <ul id="disc-movies"></ul>
   <p id="add-movie-link"><%= link_to "Click Here To Add Another Movie To This Disc", new_disc_movie_path(@disc) %></p>
+  <h3 id="public-notify"></h3>
+
 
 </div>
 
@@ -57,10 +46,26 @@
     };
 
     this.movieList = function() {
-      this.moviesObjs.forEach(obj) {
+      var result = "";
+      var discId = this.id
+      this.moviesObjs.forEach(function(obj) {
+        result = result + `<li><a href="/discs/${discId}/movies/${obj.id}">${obj.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${obj.id}">Delete?</a></li>`
+      });
+      return result
+    };
 
-      }
-    }
+    this.discPub = function() {
+      var publicResult = ""
+      var discId = this.id
+      this.user_discObjs.forEach(function(obj) {
+        if (obj.pub === 1) {
+          publicResult = "Disc Is Public"
+        }else{
+          publicResult = `<a rel="nofollow" data-method="post" href="/user_discs/${obj.id}/publicize?disc_id=${discId}">Make Disc Public?</a>`
+        };
+      });
+      return publicResult;
+    };
 
   };
 
@@ -73,7 +78,7 @@
 
   var loadUserDiscs = function(discInstance) {
     for (var i = 0; i < discInstance.user_discs.length; i++) {
-      var userDiscInstance = new UserDisc(discInstance.user_discs[i]["pub"]);
+      var userDiscInstance = new UserDisc(discInstance.user_discs[i]["id"], discInstance.user_discs[i]["pub"]);
       discInstance.user_discObjs[i] = userDiscInstance;
     };
   };
@@ -85,7 +90,8 @@
     this.imdb_url = imdb_url;
   };
 
-  function UserDisc(pub) {
+  function UserDisc(id, pub) {
+    this.id = id;
     this.pub = pub;
   };
 
@@ -101,6 +107,8 @@
       $("#spec-edition").html(d.textForSpecial());
       $("#year-released").html(d.textForYear());
       $("#amazon-link").html(d.linkForAmazon());
+      $("#disc-movies").html(d.movieList());
+      $("#public-notify").html(d.discPub());
     });
   });
 </script>
