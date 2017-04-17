@@ -158,11 +158,15 @@
 
       posting.done(function(data) {
         var movie = data;
-        var discId = <%=@disc.id%>
-        $("#disc-movies").append(`<li><a href="/discs/${discId}/movies/${movie.id}">${movie.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${movie.id}">Delete?</a></li>`)
-      })
-    })
-  })
+        var discId = <%=@disc.id%>;
+        $("#disc-movies").append(`<li><a href="/discs/${discId}/movies/${movie.id}">${movie.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${movie.id}">Delete?</a></li>`);
+        $("#movie_title").val("");
+        $("#movie_release_year").val("");
+        $("#movie_imdb_url").val("");
+
+      });
+    });
+  });
 
   $(document).ready(function() {
     generateShowPage(<%=@disc.id%>);
