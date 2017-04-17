@@ -7,7 +7,34 @@
   <p id="amazon-link"></p>
   <h2>Disc's Movie(s):</h2><br>
   <ul id="disc-movies"></ul>
-  <p id="add-movie-link"></p>
+  <div id="add-movie" class="container">
+    <h3>Add Movies:</h3>
+    <%= form_for([@disc, @movie]) do |f| %>
+      <div class="field">
+        <%= f.label :title %>
+        <% if @movie.errors[:title].any? %>
+          <%= f.text_field :title, placeholder: @movie.errors[:title].first %>
+        <% else %>
+          <%= f.text_field :title %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :release_year, "Year Released", class: 'control-label' %>
+        <% if @movie.errors[:release_year].any? %>
+          <%= f.text_field :release_year, placeholder: @movie.errors[:release_year].first %>
+        <% else %>
+          <%= f.text_field :release_year %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :imdb_url, "Movie's IMDB.com Page Address", class: 'control-label'%>
+        <%= f.text_field :imdb_url %><br>
+      </div>
+      <div class="action">
+        <%= f.submit %>
+      </div>
+      <% end %>
+  </div>
   <h3 id="public-notify"></h3>
 
 
@@ -68,10 +95,6 @@
       return publicResult;
     };
 
-    this.addMovie = function() {
-      return(`<a href="/discs/${this.id}/movies/new">Click Here To Add Another Movie To This Disc</a>`)
-    }
-
   };
 
   var loadMovies = function(discInstance) {
@@ -113,7 +136,6 @@
       $("#amazon-link").html(d.linkForAmazon());
       $("#disc-movies").html(d.movieList());
       $("#public-notify").html(d.discPub());
-      $("#add-movie-link").html(d.addMovie());
       $(".container").attr("data-id", d.id);
     });
   }
@@ -121,10 +143,17 @@
   $(".next").on("click", function(event) {
       event.preventDefault();
       var nextId = parseInt($(".container").attr("data-id")) + 1;
-      console.log(`${nextId}`)
       generateShowPage(nextId);
-
   });
+
+  $(function() {
+    $('form').submit(function(event) {
+      event.preventDefault();
+
+      var values = $(this).serialize();
+      var posting = $.post("/discs/<%=@disc.id%>/movies", values);
+    })
+  })
 
   $(document).ready(function() {
     generateShowPage(<%=@disc.id%>);

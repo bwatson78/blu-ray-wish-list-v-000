@@ -26,6 +26,7 @@ class DiscsController < ApplicationController
   end
 
   def show
+    @movie = @disc.movies.build
     respond_to do |format|
       format.html {render :show}
       format.json {render json: @disc}
