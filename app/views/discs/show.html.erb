@@ -78,7 +78,8 @@
       var discId = this.id
       this.moviesObjs.forEach(function(obj) {
         if (obj.title != null) {
-          result = result + `<li><a href="/discs/${discId}/movies/${obj.id}">${obj.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${obj.id}">Delete?</a></li>`
+          result = result + `<li><a href="/discs/${discId}/movies/${obj.id}">${obj.title}</a> |
+          <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${obj.id}">Delete?</a></li>`
         };
       });
       return result
@@ -92,7 +93,8 @@
         if (obj.pub === 1) {
           publicResult = "Disc Is Public"
         }else{
-          publicResult = `<a rel="nofollow" data-method="post" href="/user_discs/${obj.id}/publicize?disc_id=${discId}">Make Disc Public?</a>`
+          publicResult = `<a rel="nofollow" data-method="post"
+            href="/user_discs/${obj.id}/publicize?disc_id=${discId}">Make Disc Public?</a>`
         };
       });
       return publicResult;
@@ -102,14 +104,16 @@
 
   var loadMovies = function(discInstance) {
     for (var i = 0; i < discInstance.movies.length; i++) {
-      var movieInstance = new Movie(discInstance.movies[i]["id"], discInstance.movies[i]["title"], discInstance.movies[i]["release_year"], discInstance.movies[i]["imdb_url"]);
+      var movieInstance = new Movie(discInstance.movies[i]["id"], discInstance.movies[i]["title"],
+        discInstance.movies[i]["release_year"], discInstance.movies[i]["imdb_url"]);
       discInstance.moviesObjs[i] = movieInstance;
     };
   };
 
   var loadUserDiscs = function(discInstance) {
     for (var i = 0; i < discInstance.user_discs.length; i++) {
-      var userDiscInstance = new UserDisc(discInstance.user_discs[i]["id"], discInstance.user_discs[i]["pub"]);
+      var userDiscInstance = new UserDisc(discInstance.user_discs[i]["id"],
+        discInstance.user_discs[i]["pub"]);
       discInstance.user_discObjs[i] = userDiscInstance;
     };
   };
@@ -129,7 +133,8 @@
   function generateShowPage(discIDNum) {
     $.get(`/discs/${discIDNum}.json`, function(data) {
       var disc = data;
-      var d = new Disc(disc["id"], disc["title"], disc["amazon_url"], disc["special?"], disc["pressing_year"], disc["movies"], disc["user_discs"]);
+      var d = new Disc(disc["id"], disc["title"], disc["amazon_url"], disc["special?"],
+        disc["pressing_year"], disc["movies"], disc["user_discs"]);
       loadMovies(d);
       loadUserDiscs(d);
       $("#disc-title").html(d.title);
@@ -149,22 +154,21 @@
       generateShowPage(nextId);
   });
 
-  $(function() {
-    $('form').submit(function(event) {
-      event.preventDefault();
 
-      var values = $(this).serialize();
-      var posting = $.post("/discs/<%=@disc.id%>/movies", values);
+  $('form').submit(function(event) {
+    event.preventDefault();
 
-      posting.done(function(data) {
-        var movie = data;
-        var discId = <%=@disc.id%>;
-        $("#disc-movies").append(`<li><a href="/discs/${discId}/movies/${movie.id}">${movie.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${movie.id}">Delete?</a></li>`);
-        $("#movie_title").val("");
-        $("#movie_release_year").val("");
-        $("#movie_imdb_url").val("");
+    var values = $(this).serialize();
+    var posting = $.post("/discs/<%=@disc.id%>/movies", values);
 
-      });
+    posting.done(function(data) {
+      var movie = data;
+      var discId = <%=@disc.id%>;
+      $("#disc-movies").append(`<li><a href="/discs/${discId}/movies/${movie.id}">${movie.title}</a> |
+        <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${movie.id}">Delete?</a></li>`);
+      $("#movie_title").val("");
+      $("#movie_release_year").val("");
+      $("#movie_imdb_url").val("");
     });
   });
 

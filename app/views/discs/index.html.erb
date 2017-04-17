@@ -44,11 +44,8 @@
       $("#disc-list").html("");
       for (var i = 0; i < discs.length; i++) {
         var disc = new Disc(discs[i]["id"], discs[i]["title"], discs[i]["amazon_url"]);
-        var titleLink = disc.linkForTitle();
-        var amazonLink = disc.linkForAmazon();
-        var purchasedLink = disc.linkForPurchased();
-        var deleteLink = disc.linkForDelete();
-        var fullLi = '<li>' + titleLink + ' | ' + amazonLink + ' | ' + purchasedLink + ' | ' + deleteLink + '</li>';
+        var fullLi = '<li>' + disc.linkForTitle() + ' | ' + disc.linkForAmazon() +
+          ' | ' + disc.linkForPurchased() + ' | ' + disc.linkForDelete() + '</li>';
         $("#disc-list").append(fullLi)
       };
     });
