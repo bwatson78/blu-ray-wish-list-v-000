@@ -1,4 +1,4 @@
-<div data-id="<%=@disc.id%>" class="container">
+<div data-id="" class="container">
   <a href="#" class="next">Next >>></a>
   <h1 id="disc-title"></h1>
   <p id="disc-edit"></p>
@@ -114,18 +114,17 @@
       $("#disc-movies").html(d.movieList());
       $("#public-notify").html(d.discPub());
       $("#add-movie-link").html(d.addMovie());
-      $(".container").attr("data-id", discIDNum);
+      $(".container").attr("data-id", d.id);
     });
   }
 
-  $(function () {
-    $(".next").on("click", function() {
+  $(".next").on("click", function(event) {
+      event.preventDefault();
       var nextId = parseInt($(".container").attr("data-id")) + 1;
-      console.log(nextId)
+      console.log(`${nextId}`)
       generateShowPage(nextId);
 
-      });
-    });
+  });
 
   $(document).ready(function() {
     generateShowPage(<%=@disc.id%>);
