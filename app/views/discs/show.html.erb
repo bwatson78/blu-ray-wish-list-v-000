@@ -1,4 +1,4 @@
-<div class="container">
+<div data-id="<%=@disc.id%>" class="container">
   <h1 id="disc-title"></h1>
   <p id="disc-edit"></p>
   <p id="spec-edition"></p>
@@ -6,7 +6,7 @@
   <p id="amazon-link"></p>
   <h2>Disc's Movie(s):</h2><br>
   <ul id="disc-movies"></ul>
-  <p id="add-movie-link"><%= link_to "Click Here To Add Another Movie To This Disc", new_disc_movie_path(@disc) %></p>
+  <p id="add-movie-link"></p>
   <h3 id="public-notify"></h3>
 
 
@@ -67,6 +67,10 @@
       return publicResult;
     };
 
+    this.addMovie = function() {
+      return(`<a href="/discs/${this.id}/movies/new">Click Here To Add Another Movie To This Disc</a>`)
+    }
+
   };
 
   var loadMovies = function(discInstance) {
@@ -95,9 +99,8 @@
     this.pub = pub;
   };
 
-
-  $(document).ready(function() {
-    $.get('/discs/<%=@disc.id%>.json', function(data) {
+  function generateShowPage(discIDNum) {
+    $.get(`/discs/${discIDNum}.json`, function(data) {
       var disc = data;
       var d = new Disc(disc["id"], disc["title"], disc["amazon_url"], disc["special?"], disc["pressing_year"], disc["movies"], disc["user_discs"]);
       loadMovies(d);
@@ -109,6 +112,12 @@
       $("#amazon-link").html(d.linkForAmazon());
       $("#disc-movies").html(d.movieList());
       $("#public-notify").html(d.discPub());
+      $("#add-movie-link").html(d.addMovie());
     });
+  }
+
+
+  $(document).ready(function() {
+    generateShowPage(<%=@disc.id%>);
   });
 </script>
