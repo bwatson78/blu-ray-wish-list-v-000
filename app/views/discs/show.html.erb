@@ -77,10 +77,13 @@
       var result = "";
       var discId = this.id
       this.moviesObjs.forEach(function(obj) {
-        result = result + `<li><a href="/discs/${discId}/movies/${obj.id}">${obj.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${obj.id}">Delete?</a></li>`
+        if (obj.title != null) {
+          result = result + `<li><a href="/discs/${discId}/movies/${obj.id}">${obj.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${obj.id}">Delete?</a></li>`
+        };
       });
       return result
     };
+
 
     this.discPub = function() {
       var publicResult = ""
@@ -152,6 +155,12 @@
 
       var values = $(this).serialize();
       var posting = $.post("/discs/<%=@disc.id%>/movies", values);
+
+      posting.done(function(data) {
+        var movie = data;
+        var discId = <%=@disc.id%>
+        $("#disc-movies").append(`<li><a href="/discs/${discId}/movies/${movie.id}">${movie.title}</a> | <a rel="nofollow" data-method="delete" href="/discs/${discId}/movies/${movie.id}">Delete?</a></li>`)
+      })
     })
   })
 

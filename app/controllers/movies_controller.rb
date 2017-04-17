@@ -10,13 +10,9 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = @disc.movies.build(movie_params)
-    @disc.save
-    if @movie.save
-      to_disc("Movie Saved!")
-    else
-      render :new, alert: "Movie Not Saved!"
-    end
+    @movie = @disc.movies.create(movie_params)
+    @movie.save
+    render json: @movie, status: 201
   end
 
   def edit
