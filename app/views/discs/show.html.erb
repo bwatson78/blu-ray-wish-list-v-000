@@ -1,11 +1,9 @@
 <div class="container">
-  <h1 id="disc-title"><%= @disc.title %></h1> <%= link_to "Edit", edit_disc_path(@disc) %><br>
-
-  <% if @disc.special? %>
-  <p id="spec-edition"><strong>Special Edition</strong></p>
-  <% end %>
-  <p id="year-released">Year Disc Released: <%= @disc.pressing_year %></p>
-  <p id="amazon-link"><%= link_to "Disc's Amazon Page", "#{@disc.amazon_url}", target: "_blank" %></p>
+  <h1 id="disc-title"></h1>
+  <p id="disc-edit"></p>
+  <p id="spec-edition"></p>
+  <p id="year-released"></p>
+  <p id="amazon-link"></p>
   <h2>Disc's Movie(s):</h2><br>
   <ul id="disc-movies">
     <% @disc.movies.each do |movie| %>
@@ -37,6 +35,32 @@
     this.moviesObjs = [];
     this.user_discs = user_discs;
     this.user_discObjs = [];
+
+    this.editLink = function() {
+      return(`<a href="/discs/${this.id}/edit">Edit</a>`);
+    };
+
+    this.textForSpecial = function() {
+      if (this.special === true) {
+        return("<strong>Special Edition</strong>");
+      }else{
+        return("");
+      };
+    };
+
+    this.textForYear = function() {
+      return(`Year Disc Released: ${this.pressing_year}`);
+    };
+
+    this.linkForAmazon = function() {
+      return('<a target="_blank" href="' + this.amazon_url + '">Amazon Page</a>');
+    };
+
+    this.movieList = function() {
+      this.moviesObjs.forEach(obj) {
+
+      }
+    }
 
   };
 
@@ -72,6 +96,11 @@
       var d = new Disc(disc["id"], disc["title"], disc["amazon_url"], disc["special?"], disc["pressing_year"], disc["movies"], disc["user_discs"]);
       loadMovies(d);
       loadUserDiscs(d);
+      $("#disc-title").html(d.title);
+      $("#disc-edit").html(d.editLink());
+      $("#spec-edition").html(d.textForSpecial());
+      $("#year-released").html(d.textForYear());
+      $("#amazon-link").html(d.linkForAmazon());
     });
   });
 </script>
