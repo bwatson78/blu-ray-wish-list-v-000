@@ -36,7 +36,22 @@
     this.linkForDelete = function() {
       return('<a data-confirm="Are You Sure?" rel="nofollow" data-method="delete" href="/discs/' + this.id + '">Delete?</a>');
     };
+    this.buttonForOptions = function() {
+      return(`<button type="button" class="btn btn-primary" id="options-button"data-id="${this.id}">Options</button>`)
+    };
   }
+
+  $(function() {
+    $("#disc-list").on('click', '#options-button', function() {
+      var id = $(this).data("id");
+      $.get(`/discs/${id}.json`, function(data) {
+        var disc = new Disc(data["id"], data["title"], data["amazon_url"]);
+        console.log(disc);
+        $(`#options-span-${id}`).html(' | ' + disc.linkForAmazon() + ' | ' + disc.linkForPurchased() + ' | ' + disc.linkForDelete());
+      });
+    });
+  });
+
 
   $(document).ready(function() {
     $.get("/discs.json", function(data) {
@@ -44,10 +59,10 @@
       $("#disc-list").html("");
       for (var i = 0; i < discs.length; i++) {
         var disc = new Disc(discs[i]["id"], discs[i]["title"], discs[i]["amazon_url"]);
-        var fullLi = '<li>' + disc.linkForTitle() + ' | ' + disc.linkForAmazon() +
-          ' | ' + disc.linkForPurchased() + ' | ' + disc.linkForDelete() + '</li>';
+        var fullLi = '<li>' + disc.linkForTitle() + ' <span id="options-span-' + disc.id + '">' + disc.buttonForOptions() + '</span></li>';
         $("#disc-list").append(fullLi)
       };
+
     });
   });
 </script>
