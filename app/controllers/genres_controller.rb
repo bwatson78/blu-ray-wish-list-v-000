@@ -17,11 +17,7 @@ class GenresController < ApplicationController
     @genre = Genre.find_or_create_by(genre_params)
     @genre.save
     @movie.genres << @genre
-    if @movie.save
-      to_movie("Tag Created!")
-    else
-      render new_movie_genre_path(params[:movie_id]), alert: "Tag Not Created"
-    end
+    render json: @genre, status: 201
   end
 
   def destroy

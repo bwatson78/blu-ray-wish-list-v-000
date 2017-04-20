@@ -6,12 +6,43 @@
     </ul>
 
     <h3>Film's Genre(s):</h3>
-    <ul>
+    <ul id="genre-list">
       <% @movie.genres.each do |genre| %>
         <li><%= link_to genre.tag, genre_path(genre) %>
            | <%= link_to "Delete Tag", movie_genre_path(@movie.id, genre), method: 'delete' %></li>
       <% end %>
     </ul>
-    <%= link_to "Add A Genre To This Movie!", new_movie_genre_path(@movie) %>
+
+    <form class="new_genre" id="new_genre" method="post">
+      <input type="hidden" name="authenticity_token" value="">
+      <label for="[genre]tag">Genre Tag:</label>
+      <input type="text" id="tag-input" name="[genre]tag" value="">
+      <input type="hidden" name="[genre]movie_id" value="<%=@movie.id%>">
+      <input type="submit" id="button" value="Submit">
+    </form>
 
 </div>
+
+<script type="text/javascript">
+  function Genre(id, tag) {
+    this.id = id;
+    this.tag = tag;
+
+    this.genreLine = function() {
+      return(`<li><a href="/genres/${this.id}">${this.tag}</a> | <a rel="nofollow" data-method="delete" href="/movies/<%=@movie.id%>/genres/${this.id}">Delete Tag</a></li>`)
+    }
+  }
+
+  $('form').submit(function(event) {
+    event.preventDefault();
+    var movieId = <%=@movie.id%>
+    var values = $(this).serialize();
+    var posting = $.post(`/movies/${movieId}/genres`, values);
+
+    posting.done(function(data) {
+      var genre = new Genre(data["id"], data["tag"]);
+      $("#genre-list").append(genre.genreLine());
+      $("#tag-input").val("")
+    });
+  });
+</script>

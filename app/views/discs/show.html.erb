@@ -160,7 +160,6 @@
 
     var values = $(this).serialize();
     var posting = $.post("/discs/<%=@disc.id%>/movies", values);
-
     posting.done(function(data) {
       var movie = data;
       var discId = <%=@disc.id%>;
