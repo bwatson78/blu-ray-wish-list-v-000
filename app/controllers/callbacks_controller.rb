@@ -1,12 +1,14 @@
 class CallbacksController < Devise::OmniauthCallbacksController
 
     def facebook
-        @user = User.from_omniauth(request.env["omniauth.auth"])
-        sign_in_and_redirect @user
+        callback_process
     end
 
-    def google
-        @user = User.from_omniauth(request.env["omniauth.auth"])
-        sign_in_and_redirect @user
+    private
+
+    def callback_process
+      @user = User.from_omniauth(request.env["omniauth.auth"])
+      sign_in_and_redirect @user
     end
+
 end
